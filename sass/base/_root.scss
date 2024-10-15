@@ -1,0 +1,13 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/sizes" as *;
+
+:root {
+    @each $color, $shade in $colors {
+        @each $prop, $value in $shade {
+            --#{$color}-#{$prop}: #{$value};
+        }
+    }
+    @each $prop, $value in $sizes {
+        --#{$prop}: #{$value};
+    }
+}

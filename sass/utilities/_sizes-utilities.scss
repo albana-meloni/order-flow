@@ -1,0 +1,22 @@
+@use "../abstracts/sizes" as *;
+
+@each $prop, $value in $sizes {
+    .m-#{$prop} {
+        margin: $value;
+    }
+    .mx-#{$prop} {
+        margin-inline: $value;
+    }
+    .my-#{$prop} {
+        margin-block: $value;
+    }
+    .p-#{$prop} {
+        padding: $value;
+    }
+    .px-#{$prop} {
+        padding-inline: $value;
+    }
+    .py-#{$prop} {
+        padding-block: $value;
+    }
+}
