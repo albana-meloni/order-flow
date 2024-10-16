@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Descubre OrderFlow, la app web ideal para meseros. Organiza tus turnos, gestiona pedidos y registra propinas, todo de manera sencilla y eficiente." />
+		<meta
+			name="keywords"
+			content="app para meseros, gestión de pedidos, registro de propinas, OrderFlow" />
+		<meta
+			name="author"
+			content="Albana Meloni" />
+		<meta
+			name="robots"
+			content="index, follow" />
+
+		<!-- Open Graph Tags -->
+		<meta
+			property="og:title"
+			content="OrderFlow: App para Meseros" />
+		<meta
+			property="og:description"
+			content="OrderFlow es una app web diseñada para meseros que optimiza la gestión de pedidos y propinas." />
+		<meta
+			property="og:image"
+			content="URL-de-tu-imagen.jpg" />
+		<meta
+			property="og:url"
+			content="https://tuurl.com" />
+		<meta
+			property="og:type"
+			content="website" />
+		<title>OrderFlow</title>
+		<link
+			rel="stylesheet"
+			href="./css/style.css" />
+	</head>
+	<body>
+		<main>
+			<div class="py-8">
+				<h1 class="title txt-center">OrderFlow</h1>
+				<p class="txt-center pt-1">
+					Controla tus pedidos, mejora tus propinas
+				</p>
+			</div>
+			<form
+				action="./views/main.html"
+				class="form"
+				id="login-access"
+				autocomplete="off">
+				<input
+					type="text"
+					name="name"
+					id="name"
+					class="input"
+					placeholder="Nombre"
+					required />
+
+				<div
+					class="input-pin"
+					id="input-pin">
+					<input
+						type="number"
+						name="pin"
+						id="pin-1"
+						class="input"
+						placeholder="*"
+						maxlength="1"
+						required />
+					<input
+						type="number"
+						name="pin"
+						id="pin-2"
+						class="input"
+						placeholder="*"
+						maxlength="1"
+						required />
+					<input
+						type="number"
+						name="pin"
+						id="pin-3"
+						class="input"
+						placeholder="*"
+						maxlength="1"
+						required />
+					<input
+						type="number"
+						name="pin"
+						id="pin-4"
+						class="input"
+						placeholder="*"
+						maxlength="1"
+						required />
+				</div>
+				<button
+					type="submit"
+					class="btn btn-primary"
+					id="login-btn">
+					Entrar
+				</button>
+			</form>
+			<p
+				class="txt-center mt-9"
+				id="legend">
+				¿No tenes una cuenta? <a href="">Registrate acá</a>
+			</p>
+		</main>
+
+		<script
+			src="./js/index.js"
+			async></script>
+	</body>
+</html>

@@ -10,6 +10,19 @@
     .my-#{$prop} {
         margin-block: $value;
     }
+    .mt-#{$prop} {
+        margin-top: $value;
+    }
+    .mr-#{$prop} {
+        margin-right: $value;
+    }
+    .mb-#{$prop} {
+        margin-bottom: $value;
+    }
+    .ml-#{$prop} {
+        margin-left: $value;
+    }
+
     .p-#{$prop} {
         padding: $value;
     }
@@ -18,5 +31,24 @@
     }
     .py-#{$prop} {
         padding-block: $value;
+    }
+    .pt-#{$prop} {
+        padding-top: $value;
+    }
+    .pr-#{$prop} {
+        padding-right: $value;
+    }
+    .pb-#{$prop} {
+        padding-bottom: $value;
+    }
+    .pl-#{$prop} {
+        padding-left: $value;
+    }
+
+    .w-#{$prop} {
+        width: $value;
+    }
+    .h-#{$prop} {
+        height: $value;
     }
 }

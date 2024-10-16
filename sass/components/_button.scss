@@ -1,0 +1,53 @@
+@use "../abstracts/variables" as *;
+
+.btn {
+	@include btn();
+    display: inline-block;
+	min-width: var(--9);
+	min-height: var(--8);
+	padding-inline: var(--3);
+	border-radius: $border-radius;
+    transition: $transition;
+	border: 0;
+	outline: 0;
+	line-height: 1;
+	cursor: pointer;
+	&.btn-primary {
+		@include btn(
+            var(--neutral-200),
+            var(--neutral-900),
+            var(--neutral-100),
+            var(--neutral-800)
+        );
+	}
+    &.btn-secondary {
+        margin-top: 0;
+        margin-bottom: var(--8);
+        @include btn(
+            var(--neutral-200),
+            var(--neutral-900),
+            var(--neutral-100),
+            var(--neutral-800)
+        );
+
+    }
+	&.btn-success {
+		@include btn(
+			var(--neutral-200),
+			var(--success-400),
+			var(--neutral-100),
+			var(--success-100)
+		);
+	}
+    &.btn-edit {
+        @include btn(
+            var(--neutral-200),
+			var(--edit-400),
+			var(--neutral-100),
+			var(--edit-100)
+        );
+    }
+    &.w-icon {
+        @include flex($gap: var(--5));
+    }
+}

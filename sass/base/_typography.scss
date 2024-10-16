@@ -16,10 +16,17 @@ h3 {
 h1 {
 	font-weight: 900;
 }
-.title {
-	font-size: var(--7);
+p {
+	margin: 0;
 }
 a:not([class]) {
 	text-decoration-skip-ink: auto;
 	color: currentColor;
+}
+.title {
+	font-size: var(--7);
+}
+
+.txt-center {
+	text-align: center;
 }

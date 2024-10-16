@@ -1,4 +1,4 @@
-$transition: all 350ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+$transition: all 350ms ease-in-out;
 $border-radius: var(--5);
 
 @mixin pseudo(
@@ -20,4 +20,31 @@ $border-radius: var(--5);
         left: $l;
 		@content;
 	}
+}
+
+@mixin btn(
+	$txt-color: var(--neutral-900),
+	$bg-color: transparent,
+	$txt-color-hover: var(--neutral-900),
+	$bg-color-hover: transparent
+) {
+	color: $txt-color;
+	background-color: $bg-color;
+	&:hover {
+		color: $txt-color-hover;
+		background-color: $bg-color-hover;
+	}
+}
+
+@mixin flex(
+	$direction: row,
+	$content: space-between,
+	$items: center,
+	$gap: 0,
+) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $content;
+	align-items: $items;
+	gap: $gap;
 }
