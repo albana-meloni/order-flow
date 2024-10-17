@@ -24,13 +24,13 @@
 			content="OrderFlow: App para Meseros" />
 		<meta
 			property="og:description"
-			content="OrderFlow es una app web diseñada para meseros que optimiza la gestión de pedidos y propinas." />
+			content="OrderFlow: La app para meseros que optimiza tus turnos y pedidos" />
 		<meta
 			property="og:image"
-			content="URL-de-tu-imagen.jpg" />
-		<meta
+			content="./assets/img/logo-light.png" />
+		<!-- <meta
 			property="og:url"
-			content="https://tuurl.com" />
+			content="https://tuurl.com" /> -->
 		<meta
 			property="og:type"
 			content="website" />
@@ -40,6 +40,11 @@
 			href="./css/style.css" />
 	</head>
 	<body>
+		<div id="loader" data-status="loading">
+			<img
+				src="./assets/img/logo-light.png"
+				alt="Logo OrderFlow" />
+		</div>
 		<main>
 			<div class="py-8">
 				<h1 class="title txt-center">OrderFlow</h1>
@@ -52,12 +57,19 @@
 				class="form"
 				id="login-access"
 				autocomplete="off">
+				<span
+					class="mb-4"
+					id="error-msg"
+					aria-hidden="true"
+					>Nombre o contraseña incorrectos</span
+				>
 				<input
 					type="text"
-					name="name"
 					id="name"
 					class="input"
 					placeholder="Nombre"
+					title="No debe incluir números"
+					pattern="[a-zA-Z]{2,}"
 					required />
 
 				<div
@@ -65,7 +77,6 @@
 					id="input-pin">
 					<input
 						type="number"
-						name="pin"
 						id="pin-1"
 						class="input"
 						placeholder="*"
@@ -73,7 +84,6 @@
 						required />
 					<input
 						type="number"
-						name="pin"
 						id="pin-2"
 						class="input"
 						placeholder="*"
@@ -81,7 +91,6 @@
 						required />
 					<input
 						type="number"
-						name="pin"
 						id="pin-3"
 						class="input"
 						placeholder="*"
@@ -89,24 +98,36 @@
 						required />
 					<input
 						type="number"
-						name="pin"
 						id="pin-4"
 						class="input"
 						placeholder="*"
 						maxlength="1"
 						required />
 				</div>
+				<div class="input-flex">
+					<input
+						type="checkbox"
+						id="remind-me" />
+					<label for="remind-me">Recordarme</label>
+				</div>
+
 				<button
 					type="submit"
 					class="btn btn-primary"
-					id="login-btn">
+					id="login-btn"
+					data-button="login">
 					Entrar
 				</button>
 			</form>
 			<p
 				class="txt-center mt-9"
 				id="legend">
-				¿No tenes una cuenta? <a href="">Registrate acá</a>
+				¿No tenes una cuenta?
+				<a
+					href=""
+					id="register-link"
+					>Registrate acá</a
+				>
 			</p>
 		</main>
 

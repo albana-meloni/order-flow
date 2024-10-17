@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Descubre OrderFlow, la app web ideal para meseros. Organiza tus turnos, gestiona pedidos y registra propinas, todo de manera sencilla y eficiente." />
+		<meta
+			name="keywords"
+			content="app para meseros, gestión de pedidos, registro de propinas, OrderFlow" />
+		<meta
+			name="author"
+			content="Albana Meloni" />
+		<meta
+			name="robots"
+			content="index, follow" />
+
+		<!-- Open Graph Tags -->
+		<meta
+			property="og:title"
+			content="OrderFlow: App para Meseros" />
+		<meta
+			property="og:description"
+			content="OrderFlow es una app web diseñada para meseros que optimiza la gestión de pedidos y propinas." />
+		<meta
+			property="og:image"
+			content="../assets/img/logo-light.png" />
+		<!-- <meta
+			property="og:url"
+			content="https://tuurl.com" /> -->
+		<meta
+			property="og:type"
+			content="website" />
+		<title>OrderFlow</title>
+		<link
+			rel="stylesheet"
+			href="../css/style.css" />
+	</head>
+	<body>
+		<main>
+			<div class="py-8">
+				<h1 class="title txt-center">Completa con tus datos</h1>
+			</div>
+			<form
+				action="./main.html"
+				class="form"
+				id="register-access"
+				autocomplete="off">
+				<label
+					for="workdays-container"
+					class="input-label"
+					>Agrega los días y el rango horario en el que trabajes (*)</label
+				>
+				<div id="workdays-container">
+					<div
+						class="input-flex"
+						id="day-1">
+						<select class="input" required>
+                            <option value="0" disabled selected>--</option>
+							<option value="lunes">Lunes</option>
+							<option value="martes">Martes</option>
+							<option value="miercoles">Miércoles</option>
+							<option value="jueves">Jueves</option>
+							<option value="viernes">Viernes</option>
+							<option value="sabado">Sábado</option>
+							<option value="domingo">Domingo</option>
+						</select>
+						<input
+							type="time"
+							class="input"
+							required />
+						<input
+							type="time"
+							class="input"
+							required />
+					</div>
+				</div>
+				<button
+					type="button"
+					class="btn btn-secondary"
+					id="add-day">
+					Agregar otro día
+				</button>
+
+				<label
+					for="tables-1"
+					class="input-label"
+					>Agrega tus sectores y las mesas que te corresponden en cada uno
+					(*)</label
+				>
+				<div id="tables-container">
+					<div
+						class="input-flex"
+						id="tables-1">
+						<input
+							type="text"
+							class="input"
+							placeholder="Primer piso"
+							required />
+						<input
+							type="text"
+							class="input"
+							placeholder="10, 11, 12, 13, 14,..."
+							required />
+					</div>
+				</div>
+				<button
+					type="button"
+					class="btn btn-secondary"
+					id="add-tables">
+					Agregar otro sector
+				</button>
+
+				<label
+					for="goal-orders"
+					class="input-label"
+					>¿Cuál es tu objetivo de pedidos por día?</label
+				>
+				<input
+					type="number"
+					class="input"
+					id="goal-orders"
+					min="1"
+					placeholder="10" />
+
+				<label
+					for="goal-tips"
+					class="input-label"
+					>¿Cuál es tu objetivo de propina por día?</label
+				>
+				<input
+					type="number"
+					class="input"
+					id="goal-tips"
+					min="1"
+					placeholder="1000" />
+
+				<button
+					type="submit"
+					class="btn btn-success mt-7"
+					id="register-btn">
+					Guardar datos
+				</button>
+			</form>
+		</main>
+		<script
+			src="../js/register.js"
+			async></script>
+	</body>
+</html>
