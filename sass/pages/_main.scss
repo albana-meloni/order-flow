@@ -1,0 +1,61 @@
+@use "../abstracts/variables" as *;
+
+header > nav {
+	@include flex;
+	p {
+		font-weight: 700;
+	}
+	.btn-menu {
+		&__user[aria-expanded="false"] {
+			background: url("../assets/icons/user.svg") no-repeat center center;
+		}
+		&__orders[aria-expanded="false"] {
+			background: url("../assets/icons/clipboard.svg") no-repeat center center;
+		}
+		&__user[aria-expanded="true"],
+		&__orders[aria-expanded="true"] {
+			background: url("../assets/icons/x.svg") no-repeat center center;
+		}
+	}
+}
+
+.side-menu {
+	&__user {
+		left: 0;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		&[aria-hidden="true"] {
+			transform: translateX(-100%);
+		}
+	}
+	&__orders {
+		right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		&[aria-hidden="true"] {
+			transform: translateX(100%);
+		}
+	}
+    &__content {
+        div:not([class]) {
+            width: 100%;
+            height: calc(100% - var(--9));
+            @include flex($content: center);
+            p {
+                color: var(--neutral-600);
+            }
+        }
+    }
+    &__bottom {
+        & > div {
+            @include flex($gap: var(--1));
+            .circle {
+                display: block;
+                width: var(--4);
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background-color: var(--tables-900);
+            }
+        }
+    }
+}

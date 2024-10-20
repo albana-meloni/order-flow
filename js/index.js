@@ -18,7 +18,6 @@ window.addEventListener("load", () => {
 				currentDay,
 				currentTime
 			);
-			console.log(nextShiftInfo);
 
 			if (nextShiftInfo) {
 				updateTimeRemaining(div, nextShiftInfo);

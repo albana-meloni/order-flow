@@ -41,13 +41,106 @@
 	</head>
 	<body>
 		<main>
-			<div class="py-8">
-				<h1 class="title txt-center">OrderFlow</h1>
-				<p class="txt-center pt-1">
-					Controla tus pedidos, mejora tus propinas
-				</p>
+			<header>
+				<nav>
+					<button
+						type="button"
+						class="btn-menu btn-menu__user"
+						id="user-btn"
+						aria-controls="user-menu"
+						aria-expanded="false">
+						<span class="sr-only">usuario</span>
+					</button>
+					<p>Selecciona una mesa</p>
+					<button
+						type="button"
+						class="btn-menu btn-menu__orders"
+						id="orders-btn"
+						aria-controls="orders-menu"
+						aria-expanded="false">
+						<span class="sr-only">pedidos</span>
+					</button>
+				</nav>
+			</header>
+			<div
+				class="side-menu side-menu__user"
+				id="user-menu"
+				aria-hidden="true">
+				<div class="side-menu__content">
+					<p>Información de usuario</p>
+					<hr />
+					<div class="mb-6" id="orders-div">
+						<p>💪🏻 Pedidos completados: <span id="orders-count">00/00</span></p>
+						<small></small>
+					</div>
+					<div class="mb-6" id="tip-div">
+						<p>🤑 Propina total: <span id="tip-count">$00/$00</span></p>
+						<small></small>
+					</div>
+				</div>
+				<div class="side-menu__bottom">
+					<button type="button" class="btn btn-primary">
+						<img src="../assets/icons/settings.svg" alt="Configuración">
+					</button>
+					<button type="button" class="btn btn-primary">
+						<img src="../assets/icons/log-out.svg" alt="Cerrar sesión">
+					</button>
+				</div>
 			</div>
+			<div class="side-menu side-menu__orders" id="orders-menu" aria-hidden="true">
+				<div class="side-menu__content">
+					<p>Pedidos activos</p>
+					<hr>
+					<div>
+						<p class="txt-center">Aún no tenés pedidos activos, ¿bendición o condena? 🥲</p>
+					</div>
+				</div>
+				<div class="side-menu__bottom">
+					<div>
+						<span class="circle"></span>
+						<small>Podrías acercarte!</small>
+					</div>
+					<button type="button" class="btn btn-primary">
+						<img src="../assets/icons/clock.svg" alt="Historial">
+					</button>
+				</div>
+			</div>
+			<form
+				action="#"
+				class="form"
+				style="margin: var(--7) 0 0 0; max-width: 100%">
+				<div class="badge-group">
+					<input
+						type="radio"
+						name="area"
+						id="area-1"
+						class="badge"
+						title="Planta Baja"
+						checked />
+					<input
+						type="radio"
+						name="area"
+						id="area-2"
+						class="badge"
+						title="Primer Piso" />
+				</div>
+				<section
+					id="table-selector"
+					class="table-selector">
+					<button
+						id="table-1"
+						type="button"
+						class="table"
+						aria-availability="true">
+						<span>M01</span>
+						<span></span>
+					</button>
+				</section>
+			</form>
 		</main>
 
+		<script
+			src="../js/main.js"
+			async></script>
 	</body>
 </html>
