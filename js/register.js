@@ -1,5 +1,7 @@
 const registerForm = document.getElementById("register-access");
 const registerBtn = document.getElementById("register-btn");
+const goalOrders = document.getElementById("goal-orders");
+const goalTips = document.getElementById("goal-tips");
 
 let dayCount = 1;
 document.getElementById("add-day").addEventListener("click", () => {
@@ -58,5 +60,29 @@ registerForm.addEventListener("submit", () => {
 			}
 		}
 	}
+
+	for (let index = 1; index <= tablesCount; index++) {
+		let tablesInput = document.getElementById(`tables-${index}`);
+		let section = tablesInput.firstElementChild;
+		let tables = tablesInput.lastElementChild;
+
+		if (
+			section !== null &&
+			section.value !== "" &&
+			tables !== null &&
+			tables.value !== ""
+		) {
+			let tablesList = tables.value.split(",");
+			userLS.tables[section.value] = tablesList;
+		}
+	}
+
+	if (goalOrders.value !== "") {
+		userLS.goalOrders = parseInt(goalOrders.value);
+	}
+	if (goalTips.value !== "") {
+		userLS.goalTips = parseInt(goalTips.value);
+	}
+
 	localStorage.setItem("USER", JSON.stringify(userLS));
 });
