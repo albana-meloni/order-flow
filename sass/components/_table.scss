@@ -8,6 +8,9 @@
 	overflow-x: scroll;
 	padding: var(--6);
     height: 100%;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	&.active {
 		cursor: grabbing;
 	}

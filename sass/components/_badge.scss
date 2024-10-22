@@ -3,11 +3,13 @@
 .badge-group {
 	@include flex($gap: var(--3), $content: start);
 	margin-top: var(--6);
-    margin-bottom: var(--5);
+    margin-bottom: var(--2);
 	width: 100%;
-	height: var(--7);
+	height: var(--8);
     overflow-x: scroll;
-    overflow-y: visible;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	.badge {
 		min-width: calc(var(--9) + var(--6));
         height: var(--7);

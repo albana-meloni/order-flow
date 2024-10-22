@@ -121,7 +121,7 @@ tableSections.addEventListener("change", () => {
 		});
 	}
 
-	if (countTables % 4 === 0) {
+	if (countTables % 4 === 0 && countTables !== 4) {
 		tableSelector.style.gridTemplateColumns = "1fr 1fr 1fr 1fr";
 	} else if (countTables % 3 === 0) {
 		tableSelector.style.gridTemplateColumns = "1fr 1fr 1fr";
