@@ -238,6 +238,8 @@ loginForm.addEventListener("submit", (e) => {
 			});
 		}
 	}
+	localStorage.setItem("PEDIDOS", 0);
+	localStorage.setItem("PROPINA", 0);
 });
 /* ------------------- ------------------- ------------------- */
 

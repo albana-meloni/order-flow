@@ -1,0 +1,55 @@
+@use "../abstracts/variables" as *;
+
+.badge-group {
+	@include flex($gap: var(--3), $content: start);
+	margin-top: var(--6);
+    margin-bottom: var(--5);
+	width: 100%;
+	height: var(--7);
+    overflow-x: scroll;
+    overflow-y: visible;
+	.badge {
+		min-width: calc(var(--9) + var(--6));
+        height: var(--7);
+		@include pseudo($location: after, $content: attr(title)) {
+            cursor: pointer;
+            padding: var(--3);
+            text-align: center;
+			color: var(--neutral-900);
+			background-color: var(--neutral-200);
+			border-radius: $border-radius;
+			transition: $transition;
+		}
+		&:checked {
+			&::after {
+				color: var(--neutral-200);
+				background-color: var(--neutral-900);
+			}
+		}
+	}
+	/* display: flex;
+	gap: var(--2);
+	.badge {
+		position: relative;
+		width: calc(var(--9) * 1.1);
+		&::before,
+		&::after {
+			content: attr(title);
+			position: absolute;
+			padding: var(--2) var(--4);
+			cursor: pointer;
+			border-radius: var(--border);
+			transition: var(--transition);
+		}
+		&::after {
+			color: var(--black);
+			background-color: var(--white);
+		}
+		&:checked {
+			&::after {
+				color: var(--white);
+				background-color: var(--black);
+			}
+		}
+	} */
+}
