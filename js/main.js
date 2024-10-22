@@ -20,53 +20,9 @@ function openMenu(btn, menu) {
 }
 /* ------------------- ------------------- ------------------- */
 
-/* ------------------- GET USER TABLES ------------------- */
-const tableSections = document.getElementById("sections");
-const tableSelector = document.getElementById("table-selector");
-
-let userLS = JSON.parse(localStorage.getItem("USER"));
-let userTables = userLS.tables;
-let countSections = 1;
-
-for (let section in userTables) {
-	let badge = `<input type="radio" id="section-${countSections}" name="section" class="badge" title="${section}" />`;
-	tableSections.insertAdjacentHTML("beforeend", badge);
-	countSections++;
-}
-
-/* ------------------- tables selector ------------------- */
-tableSections.addEventListener("change", () => {
-	let countTables = 1;
-	tableSelector.innerHTML = "";
-	let sections = document.getElementsByName("section");
-	let currentSection;
-	sections.forEach((badge) => {
-		if (badge.checked == true) {
-			currentSection = badge.title;
-		}
-	});
-	for (let section in userTables) {
-		let sectionName;
-		section.split(" ").length === 1
-			? (sectionName = section)
-			: (sectionName = section.split(" ").join("-"));
-
-		userTables[section].forEach((table) => {
-			if (section === currentSection) {
-				let tableBtn = `
-				<button id="table-${sectionName}-${countTables}" type="button" class="table" data-availability="true">
-						<span>M${String(table).padStart(2, "0")}</span>
-						<span></span>
-				</button>`;
-				tableSelector.insertAdjacentHTML("beforeend", tableBtn);
-				countTables++;
-			}
-		});
-	}
-});
-/* ------------------- ------------------- ------------------- */
-
 /* ------------------- GET USER GOALS ------------------- */
+let userLS = JSON.parse(localStorage.getItem("USER"));
+
 /* ------------------- orders ------------------- */
 showMsgGoals(
 	userLS.goalOrders,
@@ -101,7 +57,9 @@ function showMsgGoals(goal, count, ls, div, tip = false) {
 		}
 	} else {
 		if (goal !== 0) {
-			count.innerText = `$${String(ls).padStart(2, "0")}/$${String(goal).padStart(2, "0")}`;
+			count.innerText = `$${String(ls).padStart(2, "0")}/$${String(
+				goal
+			).padStart(2, "0")}`;
 			if (ls >= goal * 2) {
 				div.lastElementChild.innerText = "ESTO ES IMPRESIONANTE!!!";
 			} else if (ls >= goal) {
@@ -114,4 +72,122 @@ function showMsgGoals(goal, count, ls, div, tip = false) {
 		}
 	}
 }
+/* ------------------- ------------------- ------------------- */
+
+/* ------------------- GET USER TABLES ------------------- */
+const tableSections = document.getElementById("sections");
+const tableSelector = document.getElementById("table-selector");
+
+let userTables = userLS.tables;
+let countSections = 0;
+
+for (let section in userTables) {
+	let badge = `<input type="radio" id="section-${countSections}" name="section" class="badge" title="${section}" />`;
+	tableSections.insertAdjacentHTML("beforeend", badge);
+	countSections++;
+}
+
+/* ------------------- show tables ------------------- */
+tableSections.addEventListener("change", () => {
+	let countTables = 0;
+	tableSelector.innerHTML = "";
+	let sections = document.getElementsByName("section");
+	let currentSection;
+	sections.forEach((badge) => {
+		if (badge.checked == true) {
+			currentSection = badge.title;
+		}
+	});
+	for (let section in userTables) {
+		let sectionName;
+		section.split(" ").length === 1
+			? (sectionName = section)
+			: (sectionName = section.split(" ").join("-"));
+
+		userTables[section].forEach((table) => {
+			if (section === currentSection) {
+				let tableBtn = `
+				<button id="table-${sectionName}-${countTables}" type="button" class="table" data-occupied="false">
+					<div>
+						<img src="../assets/icons/users.svg" alt="Personas" />
+						<span></span>
+					</div>
+					<h2 class="title">M${String(table).padStart(2, "0")}</h2>
+					<span></span>
+				</button>`;
+				tableSelector.insertAdjacentHTML("beforeend", tableBtn);
+				countTables++;
+			}
+		});
+	}
+
+	if (countTables % 4 === 0) {
+		tableSelector.style.gridTemplateColumns = "1fr 1fr 1fr 1fr";
+	} else if (countTables % 3 === 0) {
+		tableSelector.style.gridTemplateColumns = "1fr 1fr 1fr";
+	} else if (countTables % 2 === 0) {
+		tableSelector.style.gridTemplateColumns = "1fr 1fr";
+	}
+
+	/* ------------------- availability ------------------- */
+	document.querySelectorAll(".table").forEach((table) => {
+		let timer;
+		let startTime = 0;
+		let elapsedTime = 0;
+		let isRunning = false;
+		table.addEventListener("click", () => {
+			table.setAttribute("data-occupied", true);
+			let spanTime = table.lastElementChild;
+
+			if (!isRunning) {
+				startTime = Date.now() - elapsedTime;
+				timer = setInterval(() => {
+					const currentTime = Date.now();
+					elapsedTime = currentTime - startTime;
+
+					let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+					let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+					let seconds = Math.floor((elapsedTime / 1000) % 60);
+
+					hours = String(hours).padStart(2, "0");
+					minutes = String(minutes).padStart(2, "0");
+					seconds = String(seconds).padStart(2, "0");
+
+					spanTime.innerText = `${hours}:${minutes}:${seconds}`;
+				}, 10);
+			}
+		});
+	});
+});
+/* ------------------- ------------------- ------------------- */
+
+/* ------------------- MANAGE TABLE SELECTOR ------------------- */
+/* ------------------- movement ------------------- */
+let isClickDown = false;
+let startX;
+let scrollLeft;
+
+tableSelector.addEventListener("mousedown", (e) => {
+	isClickDown = true;
+	tableSelector.classList.add("active");
+	startX = e.pageX;
+	scrollLeft = tableSelector.scrollLeft;
+});
+
+tableSelector.addEventListener("mouseleave", () => {
+	isClickDown = false;
+	tableSelector.classList.remove("active");
+});
+
+tableSelector.addEventListener("mouseup", () => {
+	isClickDown = false;
+	tableSelector.classList.remove("active");
+});
+
+tableSelector.addEventListener("mousemove", (e) => {
+	if (!isClickDown) return;
+	const x = e.pageX;
+	const movement = x - startX;
+	tableSelector.scrollLeft = scrollLeft - movement;
+});
 /* ------------------- ------------------- ------------------- */

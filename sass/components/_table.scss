@@ -1,0 +1,61 @@
+@use "../abstracts/variables" as *;
+
+.table-selector {
+	margin-top: var(--7);
+	display: grid;
+    gap: var(--8);
+	cursor: grab;
+	overflow-x: scroll;
+	padding: var(--6);
+    height: 100%;
+	&.active {
+		cursor: grabbing;
+	}
+	.table {
+		@include flex($direction: column, $content: center);
+		width: calc(var(--9) + var(--5));
+		aspect-ratio: 1;
+		border: 0;
+		outline: var(--1) solid var(--neutral-200);
+		border-radius: $border-radius;
+		cursor: pointer;
+		user-select: none;
+		@include pseudo($location: before, $t: var(--6), $l: calc(var(--5) * -1)) {
+			width: var(--10);
+			height: var(--8);
+			background-color: inherit;
+			border-radius: $border-radius;
+			z-index: -1;
+		}
+		@include pseudo($location: after, $t: calc(var(--5) * -1), $l: var(--6)) {
+			width: var(--8);
+			height: var(--10);
+			background-color: inherit;
+			border-radius: $border-radius;
+			z-index: -1;
+		}
+		& > div {
+			@include flex($gap: var(--1));
+			position: absolute;
+			top: var(--3);
+			img {
+				display: inline;
+			}
+		}
+		span:nth-child(3) {
+			position: absolute;
+			bottom: var(--3);
+		}
+		&[data-occupied="false"] {
+			color: var(--neutral-900);
+			background-color: var(--tables-100);
+            & > div {
+                display: none;
+            }
+		}
+		&[data-occupied="true"] {
+			color: var(--neutral-200);
+			background-color: var(--tables-900);
+		}
+	}
+}
