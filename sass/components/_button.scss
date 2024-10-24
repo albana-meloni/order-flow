@@ -51,3 +51,8 @@
         @include flex($gap: var(--5));
     }
 }
+a.btn {
+    padding-block: var(--5);
+    text-align: center;
+    text-decoration: none;
+}

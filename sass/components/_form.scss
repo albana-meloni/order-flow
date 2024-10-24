@@ -26,7 +26,7 @@
 	}
 	.input-label {
 		display: block;
-		width: 50%;
+		width: 100%;
 		line-height: 1;
 		margin-bottom: var(--2);
 	}
@@ -42,18 +42,21 @@
 		}
 	}
 	.btn-primary {
-		margin-top: var(--7);
+		margin-top: var(--6);
 		margin-left: auto;
 		margin-right: auto;
 	}
     .input-flex {
-        @include flex($gap: var(--2));
+        @include flex($gap: var(--2), $content: center);
 		width: 100%;
         align-self: self-start;
         .input-label,
 		.input {
             margin: 0;
         }
+		.input-label {
+			width: 50%;
+		}
 		margin-bottom: var(--6);
     }
 }

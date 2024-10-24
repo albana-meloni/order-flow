@@ -42,42 +42,36 @@
 	<body>
 		<header>
 			<nav>
-				<a
-					href="./main.html"
+				<button
+					type="button"
 					class="btn-menu btn-menu__back"
 					id="go-back">
 					<span class="sr-only">volver atrás</span>
-				</a>
-				<p>Gestión - Mesa <span id="table-number">01</span></p>
+				</button>
+				<p>Gestión - Mesa <span id="table-number"></span></p>
 				<button
 					type="button"
-					class="btn-menu btn-menu__stages"
-					id="stages-btn"
-					aria-controls="stages-menu"
-					aria-expanded="false">
-					<span class="sr-only">etapas del pedido</span>
+					class="btn-menu btn-menu__save"
+					id="save-changes">
+					<span class="sr-only">guardar cambios</span>
 				</button>
 			</nav>
 		</header>
-		<div
+		<!-- <div
 			class="side-menu side-menu__stages"
 			id="stages-menu"
 			aria-hidden="true">
 			<div class="side-menu__content"></div>
 			<div class="side-menu__bottom"></div>
-		</div>
+		</div> -->
 		<main>
 			<p
 				class="txt-center"
 				style="color: var(--neutral-600)"
-				id="section">
-				planta baja
-			</p>
-			<form
-				action=""
+				id="section"></p>
+			<section
 				class="form mt-7"
-				id="register-access"
-				autocomplete="off">
+				id="register-access">
 				<div class="input-flex">
 					<label
 						for="order-stage"
@@ -85,22 +79,20 @@
 						>Estado actual:</label
 					>
 					<select
-						name="order-stage"
 						id="order-stage"
-						class="input"
-						style="margin: 0">
+						class="input">
 						<option
-							value="0"
+							value="Eligiendo del menú"
 							disabled
 							selected>
 							Eligiendo del menú
 						</option>
-						<option value="1">Pedido realizado</option>
-						<option value="2">Comida recibida</option>
-						<option value="3">2do tiempo</option>
-						<option value="4">3er tiempo</option>
-						<option value="5">Postre</option>
-						<option value="6">Pedido pagado</option>
+						<option value="Pedido realizado">Pedido realizado</option>
+						<option value="Comida recibida">Comida recibida</option>
+						<option value="2do tiempo">2do tiempo</option>
+						<option value="3er tiempo">3er tiempo</option>
+						<option value="Postre">Postre</option>
+						<option value="Pedido pagado">Pedido pagado</option>
 					</select>
 				</div>
 				<div class="input-flex">
@@ -112,8 +104,23 @@
 					<input
 						type="number"
 						class="input"
+						id="people"
 						placeholder="Cantidad de personas"
 						min="1" />
+				</div>
+				<div class="input-flex">
+					<label
+						for="tip"
+						class="input-label"
+						>Propina:</label
+					>
+					<input
+						type="number"
+						class="input"
+						id="tip"
+						placeholder="Bloqueado por ahora"
+						disabled
+						min="0" />
 				</div>
 				<button
 					type="button"
@@ -123,8 +130,17 @@
 					aria-expanded="false">
 					Cargar pedido
 				</button>
-			</form>
+			</section>
+			<section class="product-container mt-5"></section>
+			<!-- <button
+				type="button"
+				class="btn btn-success mt-8 m-auto"
+				style="display: block"
+				id="save-changes">
+				Guardar cambios
+			</button> -->
 		</main>
+
 		<div
 			class="modal"
 			id="order-modal"
@@ -140,13 +156,43 @@
 			</div>
 			<textarea
 				name="order"
-				id="order"></textarea>
-			<button
-				type="button"
-				class="btn btn-success"
-				id="save-modal">
-				Guardar
-			</button>
+				id="order"
+				placeholder="Para escribir unidades: PRODUCTO x(CANTIDAD). Si es una sola no poner nada!"></textarea>
+			<div class="modal__bottom">
+				<button
+					type="button"
+					class="btn btn-success"
+					id="save-modal">
+					Guardar
+				</button>
+			</div>
+		</div>
+
+		<div
+			class="modal"
+			id="popup"
+			aria-hidden="true">
+			<div class="modal__top">
+				<button
+					type="button"
+					class="btn"
+					id="close-popup"
+					aria-controls="popup">
+					<span class="sr-only">cerrar</span>
+				</button>
+			</div>
+			<p class="mt-5 mb-6">
+				No se guardó ningún cambio en la gestión de mesa, si regresas se
+				borrarán los cambios.
+			</p>
+			<div class="modal__bottom">
+				<a
+					href="./main.html"
+					class="btn btn-primary"
+					id="close-table">
+					Cerrar
+				</a>
+			</div>
 		</div>
 		<script src="../js/table.js"></script>
 	</body>

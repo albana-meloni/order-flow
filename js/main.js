@@ -86,12 +86,23 @@ for (let section in userTables) {
 	tableSections.insertAdjacentHTML("beforeend", badge);
 	countSections++;
 }
+let badges = document.querySelectorAll(".badge");
+badges[0].checked = true;
+showTables(badges);
+/* ------------------- table object ------------------- */
+let tableObj = {
+	mesa: null,
+	seccion: null,
+	personas: null,
+	pedido: null,
+	estado: null,
+	propina: null,
+};
 
 /* ------------------- show tables ------------------- */
-tableSections.addEventListener("change", () => {
+function showTables(sections) {
 	let countTables = 0;
 	tableSelector.innerHTML = "";
-	let sections = document.getElementsByName("section");
 	let currentSection;
 	sections.forEach((badge) => {
 		if (badge.checked == true) {
@@ -102,25 +113,24 @@ tableSections.addEventListener("change", () => {
 		let sectionName;
 		section.split(" ").length === 1
 			? (sectionName = section)
-			: (sectionName = section.split(" ").join("-"));
+			: (sectionName = section.split(" ").join("_"));
 
 		userTables[section].forEach((table) => {
 			if (section === currentSection) {
 				let tableBtn = `
-				<button id="table-${sectionName}-${countTables}" type="button" class="table" data-occupied="false">
+				<button name="${sectionName}" value="${table}" type="submit" class="table" data-occupied="false">
 					<div>
 						<img src="../assets/icons/users.svg" alt="Personas" />
-						<span></span>
+						<span id="table-people">-</span>
 					</div>
 					<h2 class="title">M${String(table).padStart(2, "0")}</h2>
-					<span></span>
+					<span id="table-time"></span>
 				</button>`;
 				tableSelector.insertAdjacentHTML("beforeend", tableBtn);
 				countTables++;
 			}
 		});
 	}
-
 	if (countTables % 4 === 0 && countTables !== 4) {
 		tableSelector.style.gridTemplateColumns = "1fr 1fr 1fr 1fr";
 	} else if (countTables % 3 === 0) {
@@ -128,36 +138,83 @@ tableSections.addEventListener("change", () => {
 	} else if (countTables % 2 === 0) {
 		tableSelector.style.gridTemplateColumns = "1fr 1fr";
 	}
+}
 
-	/* ------------------- availability ------------------- */
-	document.querySelectorAll(".table").forEach((table) => {
-		let timer;
-		let startTime = 0;
-		let elapsedTime = 0;
-		let isRunning = false;
-		table.addEventListener("click", () => {
+/* ------------------- availability ------------------- */
+let totalTables;
+document.querySelectorAll(".table .title").forEach((title) => {
+	totalTables = parseInt(title.textContent.split("M")[1]);
+});
+
+document.querySelectorAll(".table").forEach((table) => {
+	let timer;
+	let startTime = 0;
+	let elapsedTime = 0;
+	let isRunning = false;
+	let tableLS;
+	for (let i = 1; i <= totalTables; i++) {
+		if (
+			localStorage.getItem(`MESA${i}-${table.name}`) !== null &&
+			parseInt(table.value) === i
+		) {
+			tableLS = JSON.parse(localStorage.getItem(`MESA${i}-${table.name}`));
 			table.setAttribute("data-occupied", true);
-			let spanTime = table.lastElementChild;
+			table.children[0].children[1].textContent = tableLS.personas;
+		}
+		if (table.getAttribute("data-occupied") === "true") {
+			if (
+				tableLS.estado !== "Eligiendo del menú" &&
+				tableLS.estado !== "Pedido pagado"
+			) {
+				if (!isRunning) {
+					startTime = Date.now() - elapsedTime;
+					timer = setInterval(() => {
+						const currentTime = Date.now();
+						elapsedTime = currentTime - startTime;
 
-			if (!isRunning) {
-				startTime = Date.now() - elapsedTime;
-				timer = setInterval(() => {
-					const currentTime = Date.now();
-					elapsedTime = currentTime - startTime;
+						let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+						let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+						let seconds = Math.floor((elapsedTime / 1000) % 60);
 
-					let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-					let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
-					let seconds = Math.floor((elapsedTime / 1000) % 60);
+						hours = String(hours).padStart(2, "0");
+						minutes = String(minutes).padStart(2, "0");
+						seconds = String(seconds).padStart(2, "0");
 
-					hours = String(hours).padStart(2, "0");
-					minutes = String(minutes).padStart(2, "0");
-					seconds = String(seconds).padStart(2, "0");
-
-					spanTime.innerText = `${hours}:${minutes}:${seconds}`;
-				}, 10);
+						table.children[2].textContent = `${hours}:${minutes}:${seconds}`;
+					}, 10);
+				}
+			} else if (tableLS.estado === "Pedido pagado") {
+				clearInterval(timer);
+				startTime = 0;
+				elapsedTime = 0;
+				isRunning = false;
+				table.children[2].textContent.innerText = "";
+				table.setAttribute("data-occupied", false);
+				localStorage.removeItem(`MESA${i}-${table.name}`);
 			}
-		});
+		}
+	}
+	/* ------------------- occupied table ------------------- */
+
+	table.addEventListener("click", () => {
+		for (let i = 1; i <= totalTables; i++) {
+			if (
+				localStorage.getItem(`MESA${i}-${table.name}`) !== null &&
+				parseInt(table.value) === i
+			) {
+				tableLS = JSON.parse(localStorage.getItem(`MESA${i}-${table.name}`));
+				table.setAttribute("data-occupied", true);
+				document.getElementById("table-people").textContent =
+					tableLS.personas;
+				tableObj = tableLS;
+			}
+		}
+		localStorage.setItem(`MESA${table.value}-${table.name}`, JSON.stringify(tableObj));
 	});
+});
+
+tableSections.addEventListener("change", () => {
+	showTables(badges);
 });
 /* ------------------- ------------------- ------------------- */
 
