@@ -1,0 +1,23 @@
+@use "../abstracts/variables" as *;
+
+header > nav {
+	.btn-menu {
+		&__stages[aria-expanded="false"] {
+			background: url("../assets/icons/list.svg") no-repeat center center;
+		}
+		&__stages[aria-expanded="true"] {
+			background: url("../assets/icons/x.svg") no-repeat center center;
+		}
+	}
+}
+
+.side-menu {
+    &__stages {
+		right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		&[aria-hidden="true"] {
+			transform: translateX(100%);
+		}
+	}
+}

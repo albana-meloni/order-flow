@@ -1,0 +1,32 @@
+@use "../abstracts/variables" as *;
+
+.modal {
+	position: fixed;
+	top: var(--7);
+    left: var(--7);
+    padding: var(--5);
+	width: calc(100% - var(--7) * 2);
+	height: calc(100% - var(--7) * 2);
+	border-radius: $border-radius;
+	background-color: var(--neutral-200);
+    box-shadow: 0px 0px 0px var(--8) rgba(58,58,58,0.75);
+	z-index: 999;
+    transform: scale(1);
+    opacity: 1;
+    transition: $transition;
+    transition-duration: 150ms;
+    &__top {
+        @include flex($content: end);
+        margin-bottom: var(--2);
+        .btn {
+            min-width: var(--5);
+            min-height: var(--5);
+            padding: 0;
+            background: url("../assets/icons/x.svg") no-repeat center center;
+        }
+    }
+    &[aria-hidden="true"] {
+        transform: scale(0);
+        opacity: 0;
+    }
+}

@@ -4,7 +4,7 @@
     @include flex($direction: column);
 	position: relative;
 	margin-inline: auto;
-	max-width: var(--l);
+	max-width: calc(var(--l) + var(--7));
 	.input {
         border: 0;
         outline: 0;
@@ -21,9 +21,12 @@
 			outline: 2px solid var(--neutral-800);
 		}
 	}
+	select.input {
+		padding-left: var(--3);
+	}
 	.input-label {
 		display: block;
-		width: 100%;
+		width: 50%;
 		line-height: 1;
 		margin-bottom: var(--2);
 	}
@@ -45,9 +48,12 @@
 	}
     .input-flex {
         @include flex($gap: var(--2));
+		width: 100%;
         align-self: self-start;
-        .input-label {
+        .input-label,
+		.input {
             margin: 0;
         }
+		margin-bottom: var(--6);
     }
 }

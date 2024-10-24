@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Descubre OrderFlow, la app web ideal para meseros. Organiza tus turnos, gestiona pedidos y registra propinas, todo de manera sencilla y eficiente." />
+		<meta
+			name="keywords"
+			content="app para meseros, gestión de pedidos, registro de propinas, OrderFlow" />
+		<meta
+			name="author"
+			content="Albana Meloni" />
+		<meta
+			name="robots"
+			content="index, follow" />
+
+		<!-- Open Graph Tags -->
+		<meta
+			property="og:title"
+			content="OrderFlow: App para Meseros" />
+		<meta
+			property="og:description"
+			content="Gestión de pedidos y propinas - OrderFlow" />
+		<meta
+			property="og:image"
+			content="../assets/img/logo-light.png" />
+		<!-- <meta
+			property="og:url"
+			content="https://tuurl.com" /> -->
+		<meta
+			property="og:type"
+			content="website" />
+		<title>OrderFlow</title>
+		<link
+			rel="stylesheet"
+			href="../css/style.css" />
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a
+					href="./main.html"
+					class="btn-menu btn-menu__back"
+					id="go-back">
+					<span class="sr-only">volver atrás</span>
+				</a>
+				<p>Gestión - Mesa <span id="table-number">01</span></p>
+				<button
+					type="button"
+					class="btn-menu btn-menu__stages"
+					id="stages-btn"
+					aria-controls="stages-menu"
+					aria-expanded="false">
+					<span class="sr-only">etapas del pedido</span>
+				</button>
+			</nav>
+		</header>
+		<div
+			class="side-menu side-menu__stages"
+			id="stages-menu"
+			aria-hidden="true">
+			<div class="side-menu__content"></div>
+			<div class="side-menu__bottom"></div>
+		</div>
+		<main>
+			<p
+				class="txt-center"
+				style="color: var(--neutral-600)"
+				id="section">
+				planta baja
+			</p>
+			<form
+				action=""
+				class="form mt-7"
+				id="register-access"
+				autocomplete="off">
+				<div class="input-flex">
+					<label
+						for="order-stage"
+						class="input-label"
+						>Estado actual:</label
+					>
+					<select
+						name="order-stage"
+						id="order-stage"
+						class="input"
+						style="margin: 0">
+						<option
+							value="0"
+							disabled
+							selected>
+							Eligiendo del menú
+						</option>
+						<option value="1">Pedido realizado</option>
+						<option value="2">Comida recibida</option>
+						<option value="3">2do tiempo</option>
+						<option value="4">3er tiempo</option>
+						<option value="5">Postre</option>
+						<option value="6">Pedido pagado</option>
+					</select>
+				</div>
+				<div class="input-flex">
+					<label
+						for="people"
+						class="input-label"
+						>Personas:</label
+					>
+					<input
+						type="number"
+						class="input"
+						placeholder="Cantidad de personas"
+						min="1" />
+				</div>
+				<button
+					type="button"
+					class="btn btn-edit"
+					id="modal-btn"
+					aria-controls="order-modal"
+					aria-expanded="false">
+					Cargar pedido
+				</button>
+			</form>
+		</main>
+		<div
+			class="modal"
+			id="order-modal"
+			aria-hidden="true">
+			<div class="modal__top">
+				<button
+					type="button"
+					class="btn"
+					id="close-modal"
+					aria-controls="order-modal">
+					<span class="sr-only">cerrar</span>
+				</button>
+			</div>
+			<textarea
+				name="order"
+				id="order"></textarea>
+			<button
+				type="button"
+				class="btn btn-success"
+				id="save-modal">
+				Guardar
+			</button>
+		</div>
+		<script src="../js/table.js"></script>
+	</body>
+</html>

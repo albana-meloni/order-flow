@@ -9,6 +9,9 @@
 	z-index: 99;
 	background: var(--neutral-900);
 	transition: $transition;
+	&__back {
+		background: url("../assets/icons/arrow-left.svg") no-repeat center center;
+	}
 }
 
 .side-menu {	
